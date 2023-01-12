@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
-  # def new
+  #GET /resource/sign_up
+  #def new
+    #@jobs = Job.all
   #   super
-  # end
+  #end
+
+    
+  
+  
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :gender, :job_id])
   end

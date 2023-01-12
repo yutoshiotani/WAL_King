@@ -1,2 +1,38 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<section class="inner">
+  <% if flash[:notice] %>
+    <p class="text-active"><%= flash[:notice] %></p>
+  <% end %>
+	<h2 class="section-ttl"></h2>
+	<h3>
+		登録情報
+		<%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml2" %>
+		<%#= link_to "パスワードを変更する", edit_customer_registration_path, class: "btn btn-success ml2" %>
+	</h3>
+	<table class="customer_info mb3">
+		<thead>
+			<th></th>
+			<th></th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td><%= @post.title %></td>
+
+			</tr>
+			<tr>
+				<td>歩数</td>
+				<td><%= @post.count %></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><%= @post.body %></td>
+			</tr>
+			<tr>
+				<td>タグ</td>
+				<td colspan="2"><%#= @post.post_tags %></td>
+			</tr>
+			
+		</tbody>
+	</table>

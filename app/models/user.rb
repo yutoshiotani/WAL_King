@@ -7,6 +7,13 @@ class User < ApplicationRecord
   has_many :steps
   has_many :targets
   belongs_to :job, optional: true
+  
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+    end
+  end
   #has_many :comments
   #has_many :favorites
   has_one_attached :profile_image

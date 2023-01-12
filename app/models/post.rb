@@ -3,5 +3,5 @@ class Post < ApplicationRecord
   has_many :post_tags
   #has_many :comments
   #has_many :favorites
-  has_one_attached :image
+  has_one_attached :profile_image
 end
