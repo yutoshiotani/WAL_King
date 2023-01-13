@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
   end
   
   def update
-    
+   @user = User.all
   end
   
   
