@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
    devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
   root 'public/homes#top'
   get 'about' => 'public/homes#about'
 
-  
+
   namespace :admin do
    resources :tags
    resources :posts
@@ -25,13 +29,21 @@ Rails.application.routes.draw do
   end
   scope module: :public do
    resources :tags
-   resources :posts
+
    resources :jobs
-   resources :users
+   resources :users do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+   end
    resources :targets
    resources :steps
-   resources :post_tags
-   
+   resources :posts do
+    resources :post_tags
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:create]
+   end
+
 
   end
 

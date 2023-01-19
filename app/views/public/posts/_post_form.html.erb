@@ -1,18 +1,12 @@
 
 <%= form_with model:post do |f| %>
-	<%#= render 'layouts/error_messages', resource: post %>
+	<%#= render 'layouts/error_messages', model: f.object %>
 	<div class="flex">
 		<div>
-		  <%= f.label "画像", class:"col-3" %>
-      <%= f.file_field :profile_image, accept: "image/*" %>
+		  <%= f.label "画像", class:"col-3" %></br>
+          <%= f.file_field :image, accept: "image/*" %>
 		</div>
 		<table class="post_info post_form">
-			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
 					<td><%= f.label :title, "タイトル" %></td>
@@ -26,16 +20,20 @@
 					<td><%= f.label :body, "テキスト" %></td>
 					<td><%= f.text_area :body, rows: 3 %></td>
 				</tr>
-				<tr>
-					<td><%= f.label :post_tag_id, "タグ" %></td>
-					<td class="select_field"><%= f.collection_select :post_tag_id, Tag.all, :id, :name %></td>
-				</tr>
-				
-				
 			</tbody>
 		</table>
-		<div class="flex align-center pl5">
+		<div class='form-group'>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+             <div class='form-check'>
+                <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.text %>
+                <% end %>
+             </div>
+            <% end %>
+        </div>
+		  <div class="flex align-center pl5">
 			<%= f.submit submit, class: "btn btn-primary" %>
-		</div>
-	</div>
+		  </div>
+	   </div>
 <% end %>

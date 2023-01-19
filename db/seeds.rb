@@ -17,10 +17,11 @@ Admin.create!(
     {name: "医療職"},
     {name: "栄養士"}
   ])
-  
+
   Tag.create!([
     {name: "ウォーキング"},
     {name: "記事"},
     {name: "運動記録"},
-    {name: "サイクリング"}
+    {name: "サイクリング"},
+    {name: "食事"}
   ])

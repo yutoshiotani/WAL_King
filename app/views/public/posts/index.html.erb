@@ -1,7 +1,9 @@
+
 <div class="container pt-5">
   <div class="row">
-    <div class="col-12 mx-auto">
-      <h2>商品一覧</h2>
+    <div class="col-sm-2 bg-light"></div>
+    <div class="col-sm-8 mx-auto">
+      <h2>投稿一覧</h2>
       <div class="text-right">
       <%= link_to "新規投稿", new_post_path %>
 
@@ -11,24 +13,14 @@
          <thead>
            <th>投稿ID</th>
            <th>タイトル</th>
-           <th>税抜価格</th>
-           <th>ジャンル</th>
-           <th>ステータス</th>
+           <th>いいね数</th>
          </thead>
          <tbody>
            <% @posts.each do |f| %>
            <tr>
              <td><%= f.id %></td>
-             <td><%= link_to f.name, post_path(f) %></td>
-             <td><%#= post.price.to_s(:delimited) %></td>
-             <td><%#= post.genre.name %></td>
-             <td>
-               <%# if item.sale_status == true %>
-                <p class="text-success">販売中</p>
-               <%# elsif item.sale_status == false %>
-                <p class="text-muted">販売停止中</p>
-               <%# end %>
-             </td>
+             <td><%= link_to f.title, post_path(f) %></td>
+             <td><%= f.liked_users.count %></td>
            </tr>
            <% end %>
          </tbody>
@@ -41,5 +33,6 @@
         <%#= paginate @items %>
       </div>
     </div>
+    <div class="col-sm-2 bg-light"></div>
   </div>
 </div>

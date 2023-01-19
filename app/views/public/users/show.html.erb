@@ -6,6 +6,11 @@
 	<h3>
 		登録情報
 		<%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml2" %>
+		<% if current_user.following?(user) %>
+      <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
+    <% else %>
+      <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+    <% end %>
 		<%#= link_to "パスワードを変更する", edit_customer_registration_path, class: "btn btn-success ml2" %>
 	</h3>
 	<table class="customer_info mb3">
@@ -29,6 +34,7 @@
 				<td>自己紹介</td>
 				<td colspan="2"><%= @user.body %></td>
 			</tr>
+			<% if @user = current_user %>
 			<tr>
 				<td>身長</td>
 				<td colspan="2"><%= @user.height %></td>
@@ -41,11 +47,39 @@
 				<td>悩み</td>
 				<td colspan="2"><%= @user.problem %></td>
 			</tr>
+			<% end %>
 		</tbody>
 	</table>
-
+  <% if @user = current_user %>
 	<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
+	<%= link_to "目標一覧", targets_path, class: "btn" %>
+	<% end %>
+	<% if @user = current_user %>
+	<%= form_with model:@step do |f| %>
+	<table class="post_info post_form">
+			<tbody>
+				<tr>
+					<td><%= f.label :date, "日付" %></td>
+					<td><%= f.text_field :title %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :count, "歩数" %></td>
+					<td><%= f.text_field :count %> 歩</td>
+				</tr>
+			</tbody>
+		</table>
+	<% end %>
+	<% end %>
+	<h3>いいねしている投稿</h3>
+<% @user.liked_posts.each do |post| %>
+  <%= post.user.name %>
+  <%= post.title %>
+<% end %>
+<%= link_to "ユーザー一覧へ", users_path %>
+<%= link_to "ホームへ戻る", posts_path %>
+	
 	<div class="flex">
+		
 		<%#= link_to "配送先一覧", addresses_path, class: "btn btn-primary" %>
 		<%#= link_to "注文履歴一覧", orders_path, class: "btn btn-primary ml2" %>
 	</div>

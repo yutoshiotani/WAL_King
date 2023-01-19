@@ -13,7 +13,7 @@
 
        <div class="col-3">
         <%# if customer_signed_in? %>
-       <div>ようこそ、<%#= current_customer.last_name %>さん！</div>
+       <div><%#= current_customer.last_name %></div>
         <%# end %>
        </div>
 
@@ -32,7 +32,7 @@
          <%#= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-sm btn-outline-dark" %>
         <% else %>
          <%= link_to "About", about_path, class: "btn btn-sm btn-outline-dark" %>
-         <%= link_to "投稿一覧", public_posts_path, class: "btn btn-sm btn-outline-dark" %>
+         <%= link_to "投稿一覧", posts_path, class: "btn btn-sm btn-outline-dark" %>
          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-sm btn-outline-dark" %>
          <%= link_to "ログイン", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
         <% end %>

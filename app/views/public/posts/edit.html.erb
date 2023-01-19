@@ -1,2 +1,6 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+
+<section class="inner">
+	<h2 class="section-ttl">投稿編集</h2>
+  <%= render 'post_form', post: @post, ,method :patch, submit: '更新' %>
+
+</section>

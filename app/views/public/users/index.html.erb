@@ -26,6 +26,8 @@
                     <td>
                       <%= user.job.name %>
                     </td>
+                    <td>フォロー数: <%= user.followings.count %></td>
+                    <td>フォロワー数: <%= user.followers.count %></td>
                     <td>
                       <%# if customer.is_deleted %>
                     <!--span>退会</span-->
