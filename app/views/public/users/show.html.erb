@@ -1,86 +1,143 @@
-<section class="inner">
-  <% if flash[:notice] %>
-    <p class="text-active"><%= flash[:notice] %></p>
-  <% end %>
-	<h2 class="section-ttl">マイページ</h2>
-	<h3>
-		登録情報
-		<%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml2" %>
-		<% if current_user.following?(user) %>
-      <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
-    <% else %>
-      <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
-    <% end %>
-		<%#= link_to "パスワードを変更する", edit_customer_registration_path, class: "btn btn-success ml2" %>
-	</h3>
-	<table class="customer_info mb3">
-		<thead>
-			<th></th>
-			<th></th>
-			<th></th>
+<div class="container pt-5">
+	<div class="row">
+		<div class="col-md-12">
+       <% if flash[:notice] %>
+          <p class="text-active"><%= flash[:notice] %></p>
+       <% end %>
+	    <h2 class="section-ttl text-center pb-5">ユーザーページ</h2>
+	    <%#= link_to "パスワードを変更する", edit_customer_registration_path, class: "btn btn-success ml2" %>
+	  </div>
+	</div>
+	<div class="row">
+	  <%= render "public/tags/tag_search" %>
+	 <div class="col-md-4">
+	    <table class="user_info text-center ml-5">
+		     <thead>
+			     <th colspan="4">登録情報</th>
+		     </thead>
+		     <tbody>
+			     <tr>
+				      <td>名前</td>
+				      <td colspan="2"><%= @user.name %></td>
+			     </tr>
+			     <tr>
+				      <td>ステータス</td>
+				      <td></td>
+				      <td colspan="2"><%= @user.job.name %></td>
+			     </tr>
+			     <tr>
+				     <td>自己紹介</td>
+				     <td colspan="3"><%= @user.body %></td>
+			     </tr>
+			     <% if @user = current_user %>
+			     <tr>
+				     <td>性別</td><td></td>
+				     <td colspan="2"><%= @user.gender %></td>
+			     </tr>
+			     <tr>
+				     <td>身長</td><td></td>
+				     <td colspan="2"><%= @user.height %></td>
+			     </tr>
+			     <tr>
+				     <td>体重</td><td></td>
+				   <td colspan="2"><%= @user.weight %></td>
+			     </tr>
+			     <tr>
+				     <td>悩み</td><td></td>
+				     <td colspan="2"><%= @user.problem %></td>
+			     </tr>
+			     <% end %>
+		     </tbody>
+	    </table>
+
+     	<div class="pt-3 text-center">
+         <% if @user = current_user %>
+	          <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml2" %>
+	       <% else %>
+	          <% if current_user.following?(@user) %>
+              <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+            <% end %>
+	       <% end %>
+	    </div>
+
+	 </div>
+	 <div class="col-md-4">
+	   <%= image_tag @user.profile_image, size: "300x200" %>
+	 </div>
+
+	 <% if @user = current_user %>
+	 <%= render "public/users/side" %>
+	 <%# else %>
+	 <% end %>
+	</div>
+
+	<div class="row">
+	<div class="col-md-6 pt-5">
+	<% if @user = current_user %>
+  	<%= form_with model:@step do |f| %>
+	   <table class="post_info post_form">
+		  <thead>歩数記録</thead>
+			<tbody>
+				<tr>
+					<td><%= f.label :date, "日付　" %></td>
+					<td><%= f.date_field :date %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :count, "歩数　" %></td>
+					<td><%= f.text_field :count %> 歩</td>
+				</tr>
+			</tbody>
+		 </table>
+		 <%= f.submit :歩数を記録, class:'btn btn-sm btn-success' %>
+	   <% end %>
+	   
+	   </div>
+	   <div class="col-md-6 pt-5">
+	   	最新の目標
+	   	<% @targets.last(1).each do |target| %>
+
+           <%= target.text %>
+           <%= target.weight %>
+           <%= target.daily_step %>
+           <% end %>
+          </div>
+
+	   </div>
+	<%#= column_chart Step.all(:date, :count, format: "%a").count %>
+	<%#= column_chart @steps(:date, format: "%a").:count %>
+
+	<div class="pt-4 pb-2 col-md-8">最近の歩数記録</div>
+	<%= column_chart @steps.chart_date, xtitle: "日付", ytitle: "歩数", width: "400px", height: "200px" %>
+	   <table class="table">
+		 <thead>
+		  <tr>
+		  	<td>日付</td>
+		  	<td>歩数</td>
+		  </tr>
 		</thead>
 		<tbody>
+			<% @steps.each do |step| %>
 			<tr>
-				<td>名前</td>
-				<td><%= @user.name %></td>
-
-			</tr>
-			<tr>
-				<td>ステータス</td>
-				<td><%= @user.job.name %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>自己紹介</td>
-				<td colspan="2"><%= @user.body %></td>
-			</tr>
-			<% if @user = current_user %>
-			<tr>
-				<td>身長</td>
-				<td colspan="2"><%= @user.height %></td>
-			</tr>
-			<tr>
-				<td>体重</td>
-				<td colspan="2"><%= @user.weight %></td>
-			</tr>
-			<tr>
-				<td>悩み</td>
-				<td colspan="2"><%= @user.problem %></td>
+				<td><%= step.date %></td>
+				<td><%= step.count %></td>
 			</tr>
 			<% end %>
 		</tbody>
 	</table>
-  <% if @user = current_user %>
-	<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
-	<%= link_to "目標一覧", targets_path, class: "btn" %>
 	<% end %>
-	<% if @user = current_user %>
-	<%= form_with model:@step do |f| %>
-	<table class="post_info post_form">
-			<tbody>
-				<tr>
-					<td><%= f.label :date, "日付" %></td>
-					<td><%= f.text_field :title %></td>
-				</tr>
-				<tr>
-					<td><%= f.label :count, "歩数" %></td>
-					<td><%= f.text_field :count %> 歩</td>
-				</tr>
-			</tbody>
-		</table>
-	<% end %>
-	<% end %>
-	<h3>いいねしている投稿</h3>
-<% @user.liked_posts.each do |post| %>
-  <%= post.user.name %>
-  <%= post.title %>
-<% end %>
-<%= link_to "ユーザー一覧へ", users_path %>
-<%= link_to "ホームへ戻る", posts_path %>
-	
-	<div class="flex">
-		
-		<%#= link_to "配送先一覧", addresses_path, class: "btn btn-primary" %>
-		<%#= link_to "注文履歴一覧", orders_path, class: "btn btn-primary ml2" %>
 	</div>
-</section>
+
+	<div class="col-md-12">
+	   <h3>いいねしている投稿</h3>
+        <% @user.liked_posts.each do |post| %>
+          <%= post.user.name %>
+          <%= post.title %>
+        <% end %>
+     <%= link_to "ユーザー一覧へ", users_path %>
+     <%= link_to "ホームへ戻る", posts_path %>
+	 </div>
+
+	</div>
+</div>

@@ -1,45 +1,49 @@
 <div class="container pt-5">
   <div class="row">
-    <div class="col-6 mx-auto">
+    
+    <%= render 'public/tags/tag_search' %>
+    
+    <div class="col-md-8 mx-auto">
       <h3 class="bg-light">ユーザー情報編集画面</h3></br>
       <% if @user.name != "guestuser" %>
-      <%= form_with model: @user, url: public_user_path(@user), method: :patch, local:true do |f| %>
+      <%= form_with model: @user, url: user_path(@user), method: :patch, local:true do |f| %>
       <%= render 'layouts/errors', model: f.object %>
        <div class="form-group", style="display:inline-flex">
-         <%= f.label "プロフィール", class:"col-3" %>
+         <%= f.label "プロフィール", class:"col-md-2" %>
          <%= f.file_field :profile_image, accept: "image/*" %>
        </div>
        <div class="form-group">
-         <%= f.label "名前", class:"col-sm-3" %>
+         <%= f.label "名前", class:"col-md-2" %>
          <%= f.text_field :name %>
        </div>
        <div class="form-group">
-         <%= f.label "自己紹介", class:"col-sm-3" %>
+         <%= f.label "自己紹介", class:"col-md-2" %>
          <%= f.text_area :body , class:"col-sm-6"%>
        </div>
        <div>
-         <%= f.label "年齢", class:"col-sm-3" %>
+         <%= f.label "年齢", class:"col-md-2" %>
          <%= f.text_field :age %>
        </div>
        <div>
-         <%= f.label "性別", class:"col-sm-3" %>
-         <%= f.text_field :gender %>
+         <%= f.label "性別", class:"col-md-2" %>
+			   <%= f.select :gender, [["設定しない", "ignore"], ["男性","men"],["女性","women"]] %>
+			   
        </div>
        <div>
-         <%= f.label "身長", class:"col-sm-3" %>
+         <%= f.label "身長", class:"col-md-2" %>
          <%= f.text_field :height %>
        </div>
 
        <div>
-         <%= f.label "体重", class:"col-sm-3" %>
+         <%= f.label "体重", class:"col-md-2" %>
          <%= f.text_field :weight %>
        </div>
        <div>
-         <%= f.label "悩み", class:"col-sm-3" %>
+         <%= f.label "悩み", class:"col-md-2" %>
          <%= f.text_area :problem %>
        </div>
        <div class="form-group">
-         <%= f.label "ステータス", class:"col-sm-3" %>
+         <%= f.label "ステータス", class:"col-md-2" %>
          <%= f.collection_select(:job_id, @jobs, :id, :name, prompt: "-- 選択してください --") %>
        </div>
         <div>
@@ -64,5 +68,8 @@
       ゲストでログイン中は編集できません
       <% end %>
     </div>
+    
+    <%= render 'public/jobs/job_search' %>
+    
   </div>
 </div>

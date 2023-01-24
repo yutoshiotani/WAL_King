@@ -9,7 +9,7 @@ class Public::StepsController < ApplicationController
   def create
    @step = Step.new(step_params)
    @step.user_id = current_user.id
-    if @step.save!
+    if @step.save
       redirect_to user_path(@step.user_id)
     
     end

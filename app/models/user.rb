@@ -17,16 +17,16 @@ class User < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
-  
+
+
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end
-  
+
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "ゲストユーザー"
+      user.name = "guestuser"
     end
   end
   # フォローしたときの処理
@@ -41,6 +41,8 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  enum gender: { "ignore": 0,"men": 1 , "women": 2 }
   #has_many :comments
   #has_many :favorites
   has_one_attached :profile_image

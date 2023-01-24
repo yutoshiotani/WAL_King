@@ -1,0 +1,27 @@
+  ja:
+    enums:
+      target:
+        status:
+          process: "実行中"
+          success: "達成"
+          failed: "失敗"
+
+　ja:
+    enums:
+      user:
+        gender:
+          ignore: "設定しない"
+          men: "男性"
+          women: "女性"
+
+  ja:
+  activerecord:
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"
+
+  ja:
+  activerecord:
+  user:
+    name:
+      guestuser: "ゲスト"

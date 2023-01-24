@@ -11,13 +11,15 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @step = Step.new
+    @steps = @user.steps.page(params[:page]).per(7)
+    @targets = @user.targets
   end
 
   def update
    @user = User.find(params[:id])
    @jobs = Job.all
    if @user.update(user_params)
-    redirect_to public_user_path(@user)
+    redirect_to user_path(@user)
    else
     render :edit
    end
