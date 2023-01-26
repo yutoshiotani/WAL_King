@@ -36,11 +36,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :body
       t.integer :age
-      t.string :gender
+      t.integer :gender, null: false, default: 0
       t.integer :height
       t.integer :weight
       t.text :problem
-      t.boolean :user_status, null: false, default: false
+      t.integer :status, null: false, default: 0
       t.timestamps null: false
     end
 

@@ -4,17 +4,23 @@
       <div class="row">
        <div class="col-3">
         <%# if admin_signed_in? %>
-         <%#= link_to admin_orders_path do %><i class="fas fa-home"></i><%# end %>
+         <%#= link_to admin_orders_path do %><%# end %>
         <%# else %>
          <%#= link_to root_path do %<%# end %>
         <%# end %>
-        <%=link_to "WALキング", root_path %>
+        <%= link_to root_path do %>
+        <%= image_tag '14012023062143A.png', size: "180x100" %>
+        <% end %>
        </div>
 
        <div class="col-3">
-        <%# if customer_signed_in? %>
-       <div><%#= current_customer.last_name %></div>
-        <%# end %>
+        <% if user_signed_in? %>
+         <% if current_user.name == "guestuser" %>
+         <div>ゲストでログインしています</div>
+         <% else %>
+       <div>ようこそ<%= current_user.name %>さん！</div>
+        <% end %>
+        <% end %>
        </div>
 
 

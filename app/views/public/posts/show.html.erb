@@ -1,41 +1,45 @@
-<section class="inner">
+<div class="container pt-5">
+	
   <% if flash[:notice] %>
     <p class="text-active"><%= flash[:notice] %></p>
   <% end %>
-	<h2 class="section-ttl"></h2>
-	<h3>
-		登録情報
-		<%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success ml2" %>
+		
 		<%#= link_to "パスワードを変更する", edit_customer_registration_path, class: "btn btn-success ml2" %>
+   <div class="row">
 	</h3>
-	<table class="customer_info mb3">
-		<thead>
-			<th></th>
-			<th></th>
-			<th></th>
-		</thead>
-		<tbody>
-			<tr>
-				<td></td>
-				<td><%= @post.title %></td>
-
-			</tr>
-			<tr>
-				<td>歩数</td>
-				<td><%= @post.count %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="2"><%= @post.body %></td>
-			</tr>
-			<tr>
-				<td>タグ</td>
-				<td colspan="2"><%#= @post.post_tags %></td>
-			</tr>
-			
-		</tbody>
-	</table>
+	   <%= render "public/tags/tag_search" %>
+	   <div class="content col-md-8">
+		   <h2 class="section-ttl"><%= @post.title %></h2>
+		   <div class="flex text-center"> 
+		    <% if @post.image.attached? %>
+		   	 <%= image_tag @post.image, size: "400x300" %>
+		   	 <% else %>
+		   	 <%= image_tag 'no_image', size: "400x300" %>
+         <% end %>
+		   </div></br>
+		   <div class="post_info text-right">
+		   	作成者　<%= @post.user.name %></br>
+		   	<%= @post.count %>歩</br>
+		   </div>
+		   <div class="pt-3 pl-5">
+		   	 <%= @post.body %>
+		   </div></br>
+		   <div class="text-right pt-4">
+		   	<div class="text-info">タグ　　　</div>
+		   <% @post.tags.each do |tag| %>
+         <%= tag.name %>
+        <% end %></div>
+        
+		   <div class="text-right">
+		   	<% if @post.user == current_user %>
+		   	<%= link_to "削除する", destroy_post_path(post.id), class: "btn btn-danger ml2" %>
+		   	<%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success ml2" %>
+		   	<% end %>
+		   </div>
+		  
+	 
+		   
+	<% if user_signed_in? %>
 	<h3>いいね件数: <%= @post.likes.count %></h3>
 <% if current_user.already_liked?(@post) %>
   <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
@@ -60,4 +64,13 @@
   <%= f.text_field :content %>
   <br>
   <%= f.submit 'コメントする' %>
-<% end %>
+<% end %><% end %>
+</div>
+
+ <% if user_signed_in? %>
+	 <% if @user = current_user %>
+	 <%= render "public/users/side" %>
+	 <%# else %>
+	 <% end %>
+	 <% end %>
+</div>

@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_103037) do
     t.string "title", null: false
     t.integer "count"
     t.text "body"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -138,11 +139,11 @@ ActiveRecord::Schema.define(version: 2023_01_17_103037) do
     t.string "name"
     t.text "body"
     t.integer "age"
-    t.string "gender"
+    t.integer "gender", default: 0, null: false
     t.integer "height"
     t.integer "weight"
     t.text "problem"
-    t.boolean "user_status", default: false, null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

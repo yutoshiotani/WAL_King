@@ -16,6 +16,7 @@
 
               <tbody>
                 <% @users.each do |user| %>
+                 <% if user.status == "disclosure" %>
                   <tr class="light-text">
                     <td><%= user.id %></th>
                     <td class="text">
@@ -36,6 +37,7 @@
                       <%# end %>
                     </td>
                   </tr>
+                  <% end %>
                 <% end %>
               </tbody>
            </table>

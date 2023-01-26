@@ -18,7 +18,12 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-
+  enum gender: { ignore: 0, men: 1, women: 2 }
+  enum status: { secret: 0, disclosure: 1 }
+  #has_many :comments
+  #has_many :favorites
+  has_one_attached :profile_image
+  
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end
@@ -42,8 +47,4 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  enum gender: { "ignore": 0,"men": 1 , "women": 2 }
-  #has_many :comments
-  #has_many :favorites
-  has_one_attached :profile_image
 end

@@ -1,4 +1,13 @@
 class Public::UsersController < ApplicationController
+  
+  #before_action :ensure_current_user, {only: [:edit, :update]}
+   #def ensure_current_user
+     #if @current_user.id != params[:id].to_i
+        #flash[:notice]="権限がありません"
+      #redirect_to users_path
+     #end
+   #end
+  
   def edit
     @user = User.find(params[:id])
     @jobs = Job.all
@@ -29,6 +38,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :problem)
+    params.require(:user).permit(:id ,:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :problem)
   end
 end

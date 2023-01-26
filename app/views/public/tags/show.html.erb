@@ -1,2 +1,40 @@
-<h1>Public::Tags#show</h1>
-<p>Find me in app/views/public/tags/show.html.erb</p>
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-sm-2 bg-light"></div>
+    <div class="col-sm-8 mx-auto">
+      <h2>投稿一覧</h2>
+      <div class="text-right">
+      <%= link_to "新規投稿", new_post_path %>
+
+      </div>
+      <% unless @tag.posts.blank? %>
+       <table class='table mt-3'>
+         <thead>
+           <th>投稿ID</th>
+           <th>タイトル</th>
+           <th>いいね数</th>
+         </thead>
+         <tbody>
+           <% @tag.posts.each do |f| %>
+           <%# if f.status == 1 %>
+           <tr>
+             <td><%= f.id %></td>
+             <td><%= link_to f.title, post_path(f) %></td>
+             <td><%= f.liked_users.count %></td>
+           </tr>
+           <%# end %>
+           <% end %>
+         </tbody>
+       </table>
+       <% else %>
+        <p>投稿はありません</p>
+       <% end %>
+
+      <div class= "d-flex justify-content-center">
+        <%#= paginate @items %>
+      </div>
+    </div>
+    <div class="col-sm-2 bg-light"></div>
+  </div>
+</div>

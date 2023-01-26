@@ -14,7 +14,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   
   
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :gender, :job_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :problem])
   end
   # POST /resource
   # def create
@@ -72,4 +72,5 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+ 
 end
