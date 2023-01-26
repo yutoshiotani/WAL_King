@@ -17,13 +17,13 @@
          </thead>
          <tbody>
            <% @posts.each do |f| %>
-           <%# if f.status == "公開" %>
+           <% if f.status == "disclosure" %>
            <tr>
              <td><%= f.id %></td>
              <td><%= link_to f.title, post_path(f) %></td>
              <td><%= f.liked_users.count %></td>
            </tr>
-           <%# end %>
+           <% end %>
            <% end %>
          </tbody>
        </table>

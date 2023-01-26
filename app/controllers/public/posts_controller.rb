@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @like = Like.new
+    #@like = Like.new
     @comments = @post.comments
     @comment = Comment.new
   end
