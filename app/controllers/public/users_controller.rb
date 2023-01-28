@@ -35,12 +35,19 @@ class Public::UsersController < ApplicationController
     render :edit
    end
   end
+  
+  def destroy
+   user = User.find(params[:id])
+    if user_id == current_user.id
+       user.destroy 
+    end
+  end
 
 
   private
 
   def user_params
-    params.require(:user).permit(:id ,:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :problem)
+    params.require(:user).permit(:id ,:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :status, :problem)
   end
   def ensure_correct_user
     @user = User.find(params[:id])

@@ -37,9 +37,9 @@
                     <td>
                       <%= user.posts.count %>件
                     </td>
-                    <td><% if user_signed_in? %>
+                    <td><% if user_signed_in? %><% if current_user.name != "guestuser" %>
                       <%= render "public/relationships/btn", user: user %></td>
-                    <td>フォロワー数: <%= user.followers.count %><% end %></td>
+                    <td>フォロワー数: <%= user.followers.count %><% end %><% end %></td>
                   </tr>
                   <% end %>
                 <% end %>

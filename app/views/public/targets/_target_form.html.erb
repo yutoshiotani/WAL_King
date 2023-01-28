@@ -2,8 +2,12 @@
 <%= form_with model:target do |f| %>
 	<%#= render 'layouts/error_messages', model: f.object %>
 	<div class="row">
-		<div class="col-md-4 mt-5 mb-5">身長<%= current_user.height %>cmの標準体重(BMI22)は<%= current_user.fair_weight %>kgです。
-  現在のBMI<%= current_user.bmi %>
+		<div class="col-md-4 mt-5 mb-5">
+		<% unless current_user.height.blank? %>
+		身長<%= current_user.height %>cmの標準体重(BMI22)は<%= current_user.fair_weight %>kgです。</br>
+		<% unless current_user.weight.blank? %>
+     現在のBMI<%= current_user.bmi %>(体重<%= current_user.weight %>kg)
+
    <table class="table mt-3">
    	<thead>
    		<th><font size="2">BMI　(体重(kg)/　｛身長(m)×身長(m)}</font></th>
@@ -22,24 +26,32 @@
    	　</tr>
    	　<tr>
    	　	<td>25～30</td>
-   	　	<td><font size="2">肥満(Ⅰ度)<</font>/d>
+   	　	<td><font size="2">肥満　　(Ⅰ度)</font></td>
    	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi30 %>kg</font></td>
    	　</tr>
    	　<tr>
    	　	<td>30～35</td>
-   	　	<td>痩せすぎ</td>
-   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi18 %>kg</font></td>
+   	　	<td><font size="2">肥満　　(Ⅱ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi30 %>～<%= current_user.bmi35 %>kg</font></td>
    	　</tr>
    	　<tr>
-   	　	<td>30～35</td>
-   	　	<td>痩せすぎ</td>
-   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi18 %>kg</font></td>
+   	　	<td>35～40</td>
+   	　	<td><font size="2">肥満　　(Ⅲ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi35 %>～<%= current_user.bmi40 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>40～</td>
+   	　	<td><font size="2">肥満　　(Ⅳ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi40%>kg～</font></td>
    	　</tr>
    	<tbody>
    		<tr></tr>
    	</tbody>
    </table>
+   <% end %>
+   <% end %>
    </div>
+   
 		<div class="col-md-7 ml-5">
 
 		<table class="post_info post_form">

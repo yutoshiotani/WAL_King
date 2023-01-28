@@ -1,52 +1,32 @@
 <div class="container pt-5">
   <div class="row">
-    <div class="col-12 mx-auto">
-      <h2>商品一覧</h2>
-      <div class="text-right">
-      <%= link_to "新規投稿", new_post_path %>
+    <div class="col-md-5">
+      <h2>タグ一覧</h2>
 
-      </div>
-      <% unless @tags.blank? %>
        <table class='table mt-3'>
          <thead>
-           <th>投稿ID</th>
-           <th>タイトル</th>
-           <th>税抜価格</th>
-           <th>ジャンル</th>
-           <th>ステータス</th>
+           <th>タグID</th>
+           <th>タグ名</th>
+           <th></th>
          </thead>
          <tbody>
-           <% @tags.each do |f| %>
+           <% @tags.each do |tag| %>
            <tr>
-             <td><%= f.id %></td>
-             <td><%= link_to f.name, post_path(f) %></td>
-             <td><%#= post.price.to_s(:delimited) %></td>
-             <td><%#= post.genre.name %></td>
-             <td>
-               <%# if item.sale_status == true %>
-                <p class="text-success">販売中</p>
-               <%# elsif item.sale_status == false %>
-                <p class="text-muted">販売停止中</p>
-               <%# end %>
-             </td>
+             <td><%= tag.id %></td>
+             <td><%= tag.name %></td>
+             <td><%#= link_to 'Destroy', tag, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
            </tr>
            <% end %>
          </tbody>
        </table>
-       <% else %>
-        <p>投稿はありません</p>
-       <% end %>
-      <div class="">
+      </div>
+      <div class="col-md-5">タグを追加
          <%= form_with model: @tag, class: "d-flex align-items-center" do |f| %>
          <%= render 'layouts/errors', model: f.object %></br>
-          <div class="pl-3"><%= f.label :name, "タグ名", class: "small" %></div>
-          <div class="pl-3"><%= f.text_field :name, placeholder: "タグ名" %></div>
-          <div class="ml-5"><%= f.submit "新規登録", class: "form-control btn btn-success ml-5" %></div>
+          <div class="ml-3"><%= f.label :name, "タグ名", class: "small" %></div>
+          <div class="ml-3"><%= f.text_field :name, placeholder: "タグ名" %></div>
+          <div class="ml-2"><%= f.submit "新規登録", class: "form-control btn btn-success ml-5" %></div>
          <% end %>
-        </div>
-      <div class= "d-flex justify-content-center">
-        <%#= paginate @items %>
-      </div>
+       </div>
     </div>
-  </div>
 </div>

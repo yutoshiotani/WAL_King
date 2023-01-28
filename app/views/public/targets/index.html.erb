@@ -1,2 +1,31 @@
-<h1>Public::Targets#index</h1>
-<p>Find me in app/views/public/targets/index.html.erb</p>
+<div class="container pt-5">
+    <div class="row">
+        <%= render "public/tags/tag_search" %>
+        <div class="col-md-6 ml-3 mr-3">
+            目標一覧
+            <table class="table">
+                
+                <thead>
+                    <th>期限</th>
+                    <th>目標体重</th>
+                    <th>目標歩数</th>
+                    <th>達成度</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% current_user.targets.each do |target| %>
+                    <tr>
+                    <td><%= target.limit %></td>
+                    <td><%= target.weight %></td>
+                    <td><%= target.daily_step %></td>
+                    <td><%= target.status %></td>
+                    <td><%= link_to 'Destroy', target, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+                
+            </table>
+        </div>
+        <%= render "public/users/side" %>
+    </div>
+</div>

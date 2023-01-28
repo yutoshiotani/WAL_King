@@ -17,7 +17,7 @@ class Public::TargetsController < ApplicationController
   def show
     @target = Target.find(params[:id])
   end
-  
+
   def create
    @target = Target.new(target_params)
    @target.user_id = current_user.id
@@ -28,25 +28,25 @@ class Public::TargetsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
    @target = Target.find(params[:id])
    @target.user_id = current_user.id
     if @target.save!
-      redirect_to user_path(@target.user)
+      redirect_to targets_path
     else
       render :edit
     end
   end
-  
+
   def destroy
    target = Target.find(params[:id])
     if target.user_id == current_user.id
-       target.destroy 
-      redirect_to user_path(current_user)
+       target.destroy
+      redirect_to targets_path
     end
   end
-  
+
   private
   def target_params
     params.require(:target).permit(:limit, :body, :weight, :user_id, :daily_step, :status)

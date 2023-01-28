@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_103037) do
     t.text "body"
     t.integer "weight"
     t.integer "daily_step"
-    t.string "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,2 +1,59 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+	    <h2 class="section-ttl text-center pb-5">ユーザーページ</h2>
+	  </div>
+	</div>
+	<div class="row">
+	  
+	 <div class="col-lg-3 mt-5">
+	    <table class="user_info text-center ml-5">
+		     <thead>
+			     <th colspan="4">登録情報</th>
+		     </thead>
+		     <tbody>
+			     <tr>
+				      <td>名前</td>
+				      <td colspan="2"><%= @user.name %></td>
+			     </tr>
+			     <tr>
+				      <td>ステータス</td>
+				      <td></td>
+				      <td colspan="2"><%= @user.job.name %></td>
+			     </tr>
+			     <tr>
+				     <td>自己紹介</td>
+				     <td colspan="3"><%= @user.body %></td>
+			     </tr>
+			     <% if @user == current_user %>
+			     <tr>
+				     <td>性別</td><td></td>
+				     <td colspan="2"><%= @user.gender_i18n %></td>
+			     </tr>
+			     <tr>
+				     <td>身長</td><td></td>
+				     <td colspan="2"><%= @user.height %></td>
+			     </tr>
+			     <tr>
+				     <td>体重</td><td></td>
+				   <td colspan="2"><%= @user.weight %></td>
+			     </tr>
+			     <tr>
+				     <td>悩み</td><td></td>
+				     <td colspan="2"><%= @user.problem %></td>
+			     </tr>
+			     <% end %>
+		     </tbody>
+	    </table>
+        
+
+	      <div class="col-lg-3 mt-5">
+	      <% if @user.profile_image.attached? %>
+	      	<%= image_tag @user.profile_image, size: "300x200" %>
+	      <% else %>
+		   	<%= image_tag 'no_image', size: "300x200" %>
+         <% end %>
+	      </div></br>
+
+
+ 

@@ -58,40 +58,15 @@ Admin.create!(
     profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/men_profile.jpg"), filename: "men_profile.jpg")},
   ]
 )
-
-Post.create!(
-  [
-    {title: 'テスト投稿1', body: '投稿のテスト用', count: '16000', user_id: 1, status: 'disclosure', post_tag_id: 1,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside1.jpg"), filename: "outside1.jpg")},
-    {title: 'テスト投稿2', body: '２件目の投稿', count: '16000', user_id: 1, status: 'disclosure', post_tag_id: 2,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside2.jpg"), filename: "outside2.jpg")},
-    {title: '非公開投稿1', body: '投稿のテスト用1。この投稿は非公開になっていればOK', count: '16000', user_id: 1, status: 'secret', post_tag_id: 3,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside3.jpg"), filename: "outside3.jpg")},
-    {title: '非公開投稿2', body: '投稿のテスト用2。この投稿は非公開になっていればOK', count: '16000', user_id: 1, status: 'secret', post_tag_id: 4,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside4.jpg"), filename: "outside4.jpg")},
-    {title: 'test投稿3', body: 'Posting test. Please comment and favorite.', count: '16000', user_id: 2, status: 'disclosure', post_tag_id: 5,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside5.jpg"), filename: "outside5.jpg")},
-    {title: 'secret投稿3', body: 'This post is secret. ', count: '16000', user_id: 2, status: 'secret', post_tag_id: 6,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside6.jpg"), filename: "outside6.jpg")},
-    {title: 'テスト投稿1', body: '誰かの非公開投稿', count: '16000', user_id: 3, status: 'secret', post_tag_id: 7,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside7.jpg"), filename: "outside7.jpg")},
-    {title: 'テスト投稿1', body: '投稿機能の確認１１', count: '16000', user_id: 4, status: 'disclosure', post_tag_id: 8,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside8.jpg"), filename: "outside8.jpg")},
-    {title: 'テスト投稿1', body: '投稿機能の確認２２', count: '16000', user_id: 4, status: 'disclosure', post_tag_id: 9,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside9.jpg"), filename: "outside9.jpg")},
-    {title: 'テスト投稿1', body: '投稿機能の確認３３', count: '16000', user_id: 4, status: 'disclosure', post_tag_id: 10,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside10.jpg"), filename: "outside10.jpg")},
-    {title: 'テスト投稿1', body: '歩きました。良い運動になりました。', count: '16000', user_id: 1, status: 'disclosure', post_tag_id: 11,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside11.jpg"), filename: "outside11.jpg")},
-    {title: 'テスト投稿1', body: '走りました。疲れました。', count: '16000', user_id: 1, status: 'disclosure', post_tag_id: 12,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside12.jpg"), filename: "outside12.jpg")},
-    {title: '運動に関する情報提供', body: 'テスト投稿。適度な運動を。', count: '0', user_id: 9, status: 'disclosure', post_tag_id: 13,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/training2.jpg"), filename: "training2.jpg")},
-    {title: '食事について', body: 'テスト投稿。旬の作物を食べましょう。', count: '0', user_id: 7, status: 'disclosure', post_tag_id: 14,
-    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/food2.jpg"), filename: "food2.jpg")},
-  ]
-)
-
+  
+  Target.create!(
+    [
+      {limit: '2022-11-30', body: '週１で運動する', weight: '81', daily_step: '6000', status: 'success', user_id: 1},
+      {limit: '2022-12-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'failed', user_id: 1},
+      {limit: '2023-1-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'process', user_id: 1},
+      ])
+      
+      
   Step.create!(
     [
       {count: '4000', date: '2023-01-01', user_id: 1,},
@@ -105,8 +80,43 @@ Post.create!(
       {count: '2500', date: '2023-01-09', user_id: 1,},
       {count: '8000', date: '2023-01-10', user_id: 1,}
     ]
-  )
+  ) 
   
+  
+      
+  Post.create!(
+  [
+    {title: 'テスト投稿1', body: '投稿のテスト用', count: '5000', user_id: 1, status: 'disclosure', post_tag_id: 1,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside1.jpg"), filename: "outside1.jpg")},
+    {title: 'テスト投稿2', body: '２件目の投稿', count: '4000', user_id: 1, status: 'disclosure', post_tag_id: 2,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside2.jpg"), filename: "outside2.jpg")},
+    {title: '非公開投稿1', body: '投稿のテスト用1。この投稿は非公開になっていればOK', count: '6000', user_id: 1, status: 'secret', post_tag_id: 3,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside3.jpg"), filename: "outside3.jpg")},
+    {title: '非公開投稿2', body: '投稿のテスト用2。この投稿は非公開になっていればOK', count: '7000', user_id: 1, status: 'secret', post_tag_id: 4,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside4.jpg"), filename: "outside4.jpg")},
+    {title: 'test投稿3', body: 'Posting test. Please comment and favorite.', count: '8000', user_id: 2, status: 'disclosure', post_tag_id: 5,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside5.jpg"), filename: "outside5.jpg")},
+    {title: 'secret投稿3', body: 'This post is secret.', count: '3000', user_id: 2, status: 'secret', post_tag_id: 6,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside6.jpg"), filename: "outside6.jpg")},
+    {title: 'テスト投稿1', body: '誰かの非公開投稿', count: '45000', user_id: 3, status: 'secret', post_tag_id: 7,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside7.jpg"), filename: "outside7.jpg")},
+    {title: 'テスト投稿1', body: '投稿機能の確認１１', count: '3500', user_id: 4, status: 'disclosure', post_tag_id: 8,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside8.jpg"), filename: "outside8.jpg")},
+    {title: 'テスト投稿1', body: '投稿機能の確認２２', count: '8000', user_id: 4, status: 'disclosure', post_tag_id: 9,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside9.jpg"), filename: "outside9.jpg")},
+    {title: 'テスト投稿1', body: '投稿機能の確認３３', count: '10000', user_id: 4, status: 'disclosure', post_tag_id: 10,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside10.jpg"), filename: "outside10.jpg")},
+    {title: 'テスト投稿1', body: '歩きました。良い運動になりました。', count: '10000', user_id: 1, status: 'disclosure', post_tag_id: 11,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside11.jpg"), filename: "outside11.jpg")},
+    {title: 'テスト投稿1', body: '走りました。疲れました。', count: '10000', user_id: 1, status: 'disclosure', post_tag_id: 12,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/outside12.jpg"), filename: "outside12.jpg")},
+    {title: '運動に関する情報提供', body: 'テスト投稿。適度な運動を。', count: '0', user_id: 9, status: 'disclosure', post_tag_id: 13,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/training2.jpg"), filename: "training2.jpg")},
+    {title: '食事について', body: 'テスト投稿。旬の作物を食べましょう。', count: '0', user_id: 7, status: 'disclosure', post_tag_id: 14,
+    image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/food2.jpg"), filename: "food2.jpg")},
+  ]
+)
+
   PostTag.create!(
     [
       {post_id: 1, tag_id: 2},
@@ -124,10 +134,5 @@ Post.create!(
       {post_id: 13, tag_id: 1},
       {post_id: 14, tag_id: 6},
       ])
-      
-  Target.create!(
-    [
-      {limit: '2022-11-30', body: '週１で運動する', weight: '81', daily_step: '6000', status: 'clear', user_id: 1},
-      {limit: '2022-12-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'failed', user_id: 1},
-      {limit: '2023-1-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'process', user_id: 1},
-      ])
+  
+  
