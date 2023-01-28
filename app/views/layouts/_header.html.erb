@@ -13,15 +13,7 @@
         <% end %>
        </div>
 
-       <div class="col-3">
-        <% if user_signed_in? %>
-         <% if current_user.name == "guestuser" %>
-         <div>ゲストでログインしています</div>
-         <% else %>
-       <div>ようこそ<%= current_user.name %>さん！</div>
-        <% end %>
-        <% end %>
-       </div>
+       
 
 
        <div class="col-6">
@@ -42,6 +34,7 @@
          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-sm btn-outline-dark" %>
          <%= link_to "ログイン", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
         <% end %>
+        </br>
        </div>
 
       </div>

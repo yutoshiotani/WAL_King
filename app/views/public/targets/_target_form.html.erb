@@ -2,7 +2,45 @@
 <%= form_with model:target do |f| %>
 	<%#= render 'layouts/error_messages', model: f.object %>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-4 mt-5 mb-5">身長<%= current_user.height %>cmの標準体重(BMI22)は<%= current_user.fair_weight %>kgです。
+  現在のBMI<%= current_user.bmi %>
+   <table class="table mt-3">
+   	<thead>
+   		<th><font size="2">BMI　(体重(kg)/　｛身長(m)×身長(m)}</font></th>
+   		<th>判定　　</th>
+   		<th>身長<%= current_user.height %>cmの場合</th>
+   	</thead>
+   	　<tr>
+   	　	<td>18．5未満</td>
+   	　	<td><font size="2">痩せすぎ</font></td>
+   	　	<td><font size="4"><%= current_user.bmi18 %>kg～</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>18.5～25</td>
+   	　	<td><font size="2">普通体重</td>
+   	　	<td><font size="4"><%= current_user.bmi18 %>～<%= current_user.bmi25 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>25～30</td>
+   	　	<td><font size="2">肥満(Ⅰ度)<</font>/d>
+   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi30 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>30～35</td>
+   	　	<td>痩せすぎ</td>
+   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi18 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>30～35</td>
+   	　	<td>痩せすぎ</td>
+   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi18 %>kg</font></td>
+   	　</tr>
+   	<tbody>
+   		<tr></tr>
+   	</tbody>
+   </table>
+   </div>
+		<div class="col-md-7 ml-5">
 
 		<table class="post_info post_form">
 			<tbody>
@@ -23,7 +61,7 @@
 					<td><%= f.text_field :daily_step %> 歩</td>
 				</tr>
 				<tr>
-					<td><%= f.label :status, "達成状況", class:"col-md-2" %></td>
+					<td><%= f.label :status, "達成度" %></td>
 			    <td><%= f.select :status, Target.statuses.keys.map {|k| [I18n.t("enums.target.status.#{k}"), k]} %></td>
 				</tr>
 			</tbody>

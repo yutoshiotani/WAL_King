@@ -1,11 +1,13 @@
 class Public::TargetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :show, :index, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :show, :update, :destroy]
   def edit
     @target = Target.find(params[:id])
   end
 
   def index
+    @user = current_user
+    @targets = @user.targets
   end
 
   def new
@@ -49,5 +51,10 @@ class Public::TargetsController < ApplicationController
   def target_params
     params.require(:target).permit(:limit, :body, :weight, :user_id, :daily_step, :status)
   end
-
+  def ensure_correct_user
+    @target = Target.find(params[:id])
+    unless @target.user == current_user
+      redirect_to user_path(current_user)
+    end
+  end
 end

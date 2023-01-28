@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
-  
+
+  before_action :ensure_correct_user, only: [:edit, :update]
   #before_action :ensure_current_user, {only: [:edit, :update]}
    #def ensure_current_user
      #if @current_user.id != params[:id].to_i
@@ -7,20 +8,21 @@ class Public::UsersController < ApplicationController
       #redirect_to users_path
      #end
    #end
-  
+
   def edit
     @user = User.find(params[:id])
     @jobs = Job.all
   end
 
   def index
-    @users = User.all
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def show
     @user = User.find(params[:id])
     @step = Step.new
-    @steps = @user.steps.page(params[:page]).per(7)
+    @steps = @user.steps
     @targets = @user.targets
   end
 
@@ -39,5 +41,11 @@ class Public::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:id ,:name, :body, :gender, :job_id, :profile_image, :age ,:height, :weight, :problem)
+  end
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
+    end
   end
 end

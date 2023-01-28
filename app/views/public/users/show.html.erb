@@ -71,7 +71,7 @@
 		   	<%= image_tag 'no_image', size: "300x200" %>
          <% end %>
 	      </div></br>
-	      
+
 
         <% if user_signed_in? %>
 	    <% if @user == current_user %>
@@ -100,20 +100,17 @@
 		 </table>
 		 <%= f.submit :歩数を記録, class:'btn btn-sm btn-success' %>
 	   <% end %>
+	   </div></div>
 
-	   </div>
-	   <div class="col-md-6 pt-5">
-	   	
-	   	
 
-          </div>
-
-	   </div>
 	<%#= column_chart Step.all(:date, :count, format: "%a").count %>
 	<%#= column_chart @steps(:date, format: "%a").:count %>
-
-	<div class="pt-4 pb-2 col-md-8">最近の歩数記録</div>
-	<%= column_chart @steps.chart_date, xtitle: "日付", ytitle: "歩数", width: "400px", height: "200px" %>
+    <div class="row"><div class="col-md-1"></div>
+	<div class="pt-4 pb-2 col-md-5">
+	<%= column_chart @steps.chart_date, xtitle: "日付", ytitle: "歩数", width: "500px", height: "400px" %>
+	</div>
+	<div class="col-md-2"></div>
+	   <div class="col-md-3">最近の歩数記録
 	   <table class="table">
 		 <thead>
 		  <tr>
@@ -122,26 +119,62 @@
 		  </tr>
 		</thead>
 		<tbody>
-			<% @steps.each do |step| %>
+			<% @steps.last(7).each do |step| %>
 			<tr>
 				<td><%= step.date %></td>
 				<td><%= step.count %></td>
 			</tr>
 			<% end %>
 		</tbody>
-	</table>
+	</table></div>
 	<% end %>
-	</div>
+    </div>
 
 	<div class="col-md-12">
-	   <h3>いいねしている投稿</h3>
-        <% @user.liked_posts.each do |post| %>
-          <%= post.user.name %>
-          <%= post.title %>
-        <% end %>
+	   <h2>自分の投稿</h2>
+
+      <% unless @user.posts.blank? %>
+       <table class='table mt-3'>
+         <thead>
+           <th></th>
+           <th>タイトル</th>
+           <th><% if user_signed_in? %>いいね数<% end %></th>
+         </thead>
+         <tbody><% if @user == current_user %>
+           <% @user.posts.each do |post| %>
+           <tr>
+             <td>
+                 <%= link_to post_path(post) do %>
+                 <%= image_tag post.image, size:'50x50' %><% end %>
+             </td>
+             <td><%= link_to post.title, post_path(post) %></td>
+             <td class=<%= "like-" + post.id.to_s %> >
+             <%= render "public/likes/btn", post: post %></td>
+           </tr>
+           <% end %>
+           <% else %>
+           <% @user.posts.each do |post| %>
+           <% if post.status == "disclosure" %>
+           <tr>
+             <td>
+                 <%= link_to post_path(post) do %>
+                 <%= image_tag post.image, size:'50x50' %><% end %>
+             </td>
+             <td><%= link_to post.title, post_path(post) %></td>
+             <td class=<%= "like-" + post.id.to_s %> >
+             <%= render "public/likes/btn", post: post %></td>
+           <% end %></tr>
+           <% end %>
+           <% end %>
+         </tbody>
+       </table>
+       <% else %>
+        <p>投稿はありません</p>
+       <% end %>
      <%= link_to "ユーザー一覧へ", users_path %>
      <%= link_to "ホームへ戻る", posts_path %>
 	 </div>
 <% end %>
 	</div>
 </div>
+	</div>

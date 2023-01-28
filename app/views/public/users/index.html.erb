@@ -1,16 +1,24 @@
 <div class="container">
   <div class="row mb-4">
-    <div class="col-12">
+    <%= render "public/tags/tag_search" %>
+    <div class="col-md-7">
       <h3 class="offset-1 my-5 text title-text">会員一覧</h3>
       <div class="row">
         <div class="col-12 mx-auto">
+          <%= search_form_for @q do |f| %>
+          <%= f.label :name, "ユーザー検索" %>
+          <%= f.search_field :name_cont %>
+          <%= f.submit "検索" %>
+          <% end %>
+
           <table class="table table-hover">
             <thead>
               <tr class="table-active text">
-                <th>会員ID</th>
                 <th>氏名</th>
                 <th>ステータス</th>
                 <th>投稿数</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
 
@@ -18,7 +26,6 @@
                 <% @users.each do |user| %>
                  <% if user.status == "disclosure" %>
                   <tr class="light-text">
-                    <td><%= user.id %></th>
                     <td class="text">
                       <%= link_to user_path(user), class: "text-dark" do %>
                         <%= user.name %>
@@ -27,15 +34,12 @@
                     <td>
                       <%= user.job.name %>
                     </td>
-                    <td>フォロー数: <%= user.followings.count %></td>
-                    <td>フォロワー数: <%= user.followers.count %></td>
                     <td>
-                      <%# if customer.is_deleted %>
-                    <!--span>退会</span-->
-                      <%# else %>
-                        <!--span class="text-success text">有効</span-->
-                      <%# end %>
+                      <%= user.posts.count %>件
                     </td>
+                    <td><% if user_signed_in? %>
+                      <%= render "public/relationships/btn", user: user %></td>
+                    <td>フォロワー数: <%= user.followers.count %><% end %></td>
                   </tr>
                   <% end %>
                 <% end %>
@@ -44,5 +48,6 @@
         </div>
       </div>
     </div>
+    <%= render "public/users/side" %>
   </div>
 </div>

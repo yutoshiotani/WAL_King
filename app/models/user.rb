@@ -24,6 +24,28 @@ class User < ApplicationRecord
   #has_many :favorites
   has_one_attached :profile_image
   
+  def fair_weight
+  height * height * 22 / 10000
+  end
+  def bmi
+    weight * 10000 / height / height 
+  end
+  def bmi25
+    height * height * 25 / 10000
+  end
+  def bmi30
+    height * height * 30 / 10000
+  end
+  def bmi35
+    height * height * 35 / 10000
+  end
+  def bmi40
+    height * height * 40 / 10000
+  end
+  def bmi18
+    height * height * 37 / 20000
+  end
+  
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end
@@ -34,15 +56,14 @@ class User < ApplicationRecord
       user.name = "guestuser"
     end
   end
-  # フォローしたときの処理
-  def follow(user_id)
-    relationships.create(followed_id: user_id)
+  def follow(user)
+    relationships.create(followed_id: user.id)
   end
-  # フォローを外すときの処理
-  def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+
+  def unfollow(user)
+    relationships.find_by(followed_id: user.id).destroy
   end
-   # フォローしているか判定
+
   def following?(user)
     followings.include?(user)
   end

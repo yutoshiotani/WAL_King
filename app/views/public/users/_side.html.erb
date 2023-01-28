@@ -1,4 +1,12 @@
-<div class="col-md-3 side_menu bg-light">
+<% if user_signed_in? %>
+<div class="col-md-3 side_menu">
+
+         <% if current_user.name == "guestuser" %>
+         <div class="pt-3 pb-3">ゲストでログインしています</div>
+         <% else %>
+       <div class="pt-3 pb-3">ようこそ<%= current_user.name %>さん！</div>
+        <% end %>
+
 	<table class="table">
 	   		<% current_user.targets.last(1).each do |target| %>
 	   		<thead>
@@ -28,9 +36,10 @@
 	   		<% end %>
 	   	</table></br>
 	   	<div class="text-center">
-  <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn" %></br>
-	<%= link_to "新規投稿", new_post_path, class: "btn" %></br>
-	<%= link_to "目標設定", new_target_path, class: "btn" %></br>
-	<%= link_to "目標一覧", targets_path, class: "btn" %></br>
+  <%= link_to "ユーザー情報編集", edit_user_path(current_user), class: "btn btn-outline-dark" %></br></br>
+	<%= link_to "新規投稿", new_post_path, class: "btn btn-outline-dark" %></br></br>
+	<%= link_to "目標設定", new_target_path, class: "btn btn-outline-dark" %></br></br>
+	<%= link_to "目標一覧", targets_path, class: "btn btn-outline-dark" %></br></br>
 	</div>
 </div>
+<% end %>
