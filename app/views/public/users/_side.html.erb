@@ -1,6 +1,36 @@
-<div class="col-md-2  side_menu">
-  <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn" %>
-	<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
-	<%= link_to "目標設定", new_target_path, class: "btn" %>
-	<%= link_to "目標一覧", targets_path, class: "btn" %>
+<div class="col-md-3 side_menu bg-light">
+	<table class="table">
+	   		<% current_user.targets.last(1).each do |target| %>
+	   		<thead>
+	   			<tr>
+            <th>最新の目標</th>
+          </tr></thead>
+	   		<tr>
+	   			<td>期限　</td>
+	   			<td><%= target.limit %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>内容　</td>
+	   			<td><%= target.body %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>目標体重　</td>
+	   			<td><%= target.weight %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>一日の目標歩数</td>
+	   			<td><%= target.daily_step %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>達成度</td>
+	   			<td><%= target.status_i18n %></td>
+	   		</tr>
+	   		<% end %>
+	   	</table></br>
+	   	<div class="text-center">
+  <%= link_to "ユーザー情報編集", edit_user_path(@user), class: "btn" %></br>
+	<%= link_to "新規投稿", new_post_path, class: "btn" %></br>
+	<%= link_to "目標設定", new_target_path, class: "btn" %></br>
+	<%= link_to "目標一覧", targets_path, class: "btn" %></br>
+	</div>
 </div>

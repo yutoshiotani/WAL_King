@@ -124,3 +124,10 @@ Post.create!(
       {post_id: 13, tag_id: 1},
       {post_id: 14, tag_id: 6},
       ])
+      
+  Target.create!(
+    [
+      {limit: '2022-11-30', body: '週１で運動する', weight: '81', daily_step: '6000', status: 'clear', user_id: 1},
+      {limit: '2022-12-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'failed', user_id: 1},
+      {limit: '2023-1-31', body: '週2で運動する', weight: '78', daily_step: '8000', status: 'process', user_id: 1},
+      ])

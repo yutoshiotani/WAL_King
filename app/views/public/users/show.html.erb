@@ -64,14 +64,14 @@
         <% end %>
 	    </div>
 
-	      <div class="col-md-4">
+	      <div class="col-md-3">
 	      <% if @user.profile_image.attached? %>
-	      	<span>hi</span>
 	      	<%= image_tag @user.profile_image, size: "300x200" %>
 	      <% else %>
 		   	<%= image_tag 'no_image', size: "300x200" %>
          <% end %>
-	      </div>
+	      </div></br>
+	      
 
         <% if user_signed_in? %>
 	    <% if @user == current_user %>
@@ -103,13 +103,9 @@
 
 	   </div>
 	   <div class="col-md-6 pt-5">
-	   	最新の目標
-	   	<% @targets.last(1).each do |target| %>
+	   	
+	   	
 
-           <%= target.text %>
-           <%= target.weight %>
-           <%= target.daily_step %>
-           <% end %>
           </div>
 
 	   </div>

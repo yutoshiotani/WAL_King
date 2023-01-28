@@ -24,7 +24,6 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-  
    @post = Post.new(post_params)
    @post.user_id = current_user.id
    @tags = Tag.all
@@ -44,7 +43,14 @@ class Public::PostsController < ApplicationController
     render :edit
    end
   end
-
+  
+  def destroy
+   post = Post.find(params[:id])
+    if post.user_id == current_user.id
+       post.destroy 
+    end
+  end
+  
   private
   def post_params
     params.require(:post).permit(:title, :body, :count, :user_id, :image , tag_ids: [])

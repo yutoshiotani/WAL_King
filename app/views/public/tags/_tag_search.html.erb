@@ -12,5 +12,20 @@
      </tr>
     </tbody>
     <% end %>
+  </table></br></br></br>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ステータス検索</th>
+      </tr>
+    </thead>
+    <% Job.all.each do |job| %>
+    <tbody>
+     <tr>
+       <td><%= link_to job.name, job_path(job.id) %></td>
+     </tr>
+    </tbody>
+    <% end %>
   </table>
 </div>

@@ -13,10 +13,10 @@
  *= require_tree .
  *= require_self
  */
-body {
+body1 {
   background-image: image-url("hoge.jpg");
 }
 
 side_menu{
-  background: #89e4a8;
+  background-color: #89e4a8;
 }

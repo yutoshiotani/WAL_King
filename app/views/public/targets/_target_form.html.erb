@@ -1,0 +1,38 @@
+
+<%= form_with model:target do |f| %>
+	<%#= render 'layouts/error_messages', model: f.object %>
+	<div class="row">
+		<div class="col-md-8">
+
+		<table class="post_info post_form">
+			<tbody>
+				<tr>
+					<td><%= f.label :limit, "期限" %></td>
+					<td><%= f.date_field :limit %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :body, "内容" %></td>
+					<td><%= f.text_area :body %> </td>
+				</tr>
+				<tr><%= current_user.height %>
+					<td><%= f.label :weight, "目標体重" %></td>
+					<td><%= f.text_field :weight %> kg</td>
+				</tr>
+				<tr>
+					<td><%= f.label :daily_step, "一日の目標歩数" %></td>
+					<td><%= f.text_field :daily_step %> 歩</td>
+				</tr>
+				<tr>
+					<td><%= f.label :status, "達成状況", class:"col-md-2" %></td>
+			    <td><%= f.select :status, Target.statuses.keys.map {|k| [I18n.t("enums.target.status.#{k}"), k]} %></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		  <div class="flex align-center pl5">
+			<%= f.submit submit, class: "btn btn-primary" %>
+		  </div>
+		  </div>
+	   </div>
+<% end %>

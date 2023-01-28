@@ -6,8 +6,7 @@ class CreateTargets < ActiveRecord::Migration[6.1]
       t.text :body
       t.integer :weight
       t.integer :daily_step
-      t.string :status, null: false
-
+      t.string :status, null: false, default: 0
       t.timestamps
     end
   end
