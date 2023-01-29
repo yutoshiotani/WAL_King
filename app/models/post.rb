@@ -15,7 +15,7 @@ class Post < ApplicationRecord
   #has_many :comments
   #has_many :favorites
   has_one_attached :image
-  def image
+  def get_image
     (image.attached?) ? image : 'no_image.jpg'
   end
 end

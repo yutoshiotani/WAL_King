@@ -16,7 +16,7 @@
 			<% Post.all.last(4).each do |post| %>
 			<%# if post.status == "disclosure" %>
 				<%= link_to post_path(post) do %>
-					<%= image_tag post.image, size: '150x100' %>
+					<%= image_tag post.getimage, size: '150x100' %>
 					<%= post.title %>
 				<% end %>
 				<% end %>
