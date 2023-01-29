@@ -64,11 +64,11 @@
 	    </div>
 
 	      <div class="col-lg-3 mt-5">
-	      <% if @user.profile_image.attached? %>
+	      <%# if @user.profile_image.attached? %>
 	      	<%= image_tag @user.profile_image, size: "300x200" %>
-	      <% else %>
-		   	<%= image_tag 'no_image.jpg', size: "300x200" %>
-         <% end %>
+	      <%# else %>
+		   	<%#= image_tag 'no_image.jpg', size: "300x200" %>
+         <%# end %>
 	      </div></br>
 
 

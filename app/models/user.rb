@@ -23,7 +23,9 @@ class User < ApplicationRecord
   #has_many :comments
   #has_many :favorites
   has_one_attached :profile_image
-  
+  #def get_profile_image
+    #(profile_image.attached?) ? profile_image : 'no_image.jpg'
+  #end
   def fair_weight
   height * height * 22 / 10000
   end

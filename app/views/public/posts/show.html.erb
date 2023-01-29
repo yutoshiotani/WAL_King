@@ -6,11 +6,11 @@
 	     <div class="content col-md-7">
 		     <h2 class="section-ttl"><%= @post.title %></h2>
 		       <div class="flex text-center">
-		         <% if @post.image.attached? %>
+		         <%# if @post.image.attached? %>
 		   	     <%= image_tag @post.image, size: "400x300" %>
-		   	     <% else %>
-		   	     <%= image_tag 'no_image', size: "400x300" %>
-             <% end %>
+		   	     <%# else %>
+		   	     <%#= image_tag 'no_image', size: "400x300" %>
+             <%# end %>
 		       </div></br>
 		       <div class="post_info text-right">
 		   	     作成者　<%= @post.user.name %></br>
@@ -48,11 +48,9 @@
 	       <div class="content col-md-7">
 		     <h2 class="section-ttl"><%= @post.title %></h2>
 		     <div class="flex text-center">
-		     <% if @post.image.attached? %>
+		     
 		   	  <%= image_tag @post.image, size: "400x300" %>
-		   	 <% else %>
-		   	  <%= image_tag 'no_image', size: "400x300" %>
-         <% end %>
+		   	 
 		     </div></br>
 		     <div class="post_info text-right">
 		   	  作成者　<%= @post.user.name %></br>
@@ -88,11 +86,11 @@
 	       <div class="content col-md-7">
 		     <h2 class="section-ttl"><%= @post.title %></h2>
 		     <div class="flex text-center">
-		     <% if @post.image.attached? %>
+		     <%# if @post.image.attached? %>
 		   	  <%= image_tag @post.image, size: "400x300" %>
-		   	 <% else %>
-		   	  <%= image_tag 'no_image', size: "400x300" %>
-         <% end %>
+		   	 <%# else %>
+		   	  <%#= image_tag 'no_image', size: "400x300" %>
+         <%# end %>
 		     </div></br>
 		     <div class="post_info text-right">
 		   	  作成者　<%= @post.user.name %></br>
