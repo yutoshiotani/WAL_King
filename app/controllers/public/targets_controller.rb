@@ -31,8 +31,8 @@ class Public::TargetsController < ApplicationController
 
   def update
    @target = Target.find(params[:id])
-   @target.user_id = current_user.id
-    if @target.save!
+   #@target.user_id = current_user.id
+    if @target.update(target_params)
       redirect_to targets_path
     else
       render :edit

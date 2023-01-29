@@ -11,6 +11,7 @@
                     <th>目標歩数</th>
                     <th>達成度</th>
                     <th></th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <% current_user.targets.each do |target| %>
@@ -18,8 +19,9 @@
                     <td><%= target.limit %></td>
                     <td><%= target.weight %></td>
                     <td><%= target.daily_step %></td>
-                    <td><%= target.status %></td>
-                    <td><%= link_to 'Destroy', target, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
+                    <td><%= target.status_i18n %></td>
+                    <td><%= link_to '編集', edit_target_path(target), class: "btn btn-sm btn-success" %></td>
+                    <td><%= link_to '破棄', target, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
                     </tr>
                     <% end %>
                 </tbody>
