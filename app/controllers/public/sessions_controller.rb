@@ -12,13 +12,14 @@ class Public::SessionsController < Devise::SessionsController
   # def create
   #   super
   # end
+  
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
   def after_sign_in_path_for(resource)
-    public_user_path(current_user.id)
+    user_path(current_user.id)
   end
   # protected
 

@@ -1,2 +1,40 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+
+<div class="container pt-5">
+  <div class="row">
+    <%= render "public/tags/tag_search" %>
+    <div class="col-sm-7 mx-auto">
+      <h2>投稿一覧</h2>
+
+      <% unless @posts.blank? %>
+       <table class='table mt-3'>
+         <thead>
+           <th></th>
+           <th>タイトル</th>
+           <th><% if user_signed_in? %>いいね数<% end %></th>
+         </thead>
+         <tbody>
+           <% @posts.each do |post| %>
+           <% if post.status == "disclosure" %>
+           <tr>
+             <td>
+                 <%= link_to post_path(post) do %>
+                 <%= image_tag post.image, size:'50x50' %><% end %>
+             </td>
+             <td><%= link_to post.title, post_path(post) %></td>
+             <td class=<%= "like-" + post.id.to_s %> >
+             <%= render "public/likes/btn", post: post %></td>
+           <% end %></tr>
+           <% end %>
+         </tbody>
+       </table>
+       <% else %>
+        <p>投稿はありません</p>
+       <% end %>
+
+      <div class= "d-flex justify-content-center">
+        <%#= paginate @posts %>
+      </div>
+    </div>
+    <%= render "public/users/side" %>
+  </div>
+</div>

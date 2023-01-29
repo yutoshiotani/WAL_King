@@ -1,2 +1,113 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container pt-5">
+   <div class="row">
+	   <%= render "public/tags/tag_search" %>
+	 <% if user_signed_in? %>
+	  <% if @post.user == current_user %>
+	     <div class="content col-md-7">
+		     <h2 class="section-ttl"><%= @post.title %></h2>
+		       <div class="flex text-center">
+		         <% if @post.image.attached? %>
+		   	     <%= image_tag @post.image, size: "400x300" %>
+		   	     <% else %>
+		   	     <%= image_tag 'no_image', size: "400x300" %>
+             <% end %>
+		       </div></br>
+		       <div class="post_info text-right">
+		   	     作成者　<%= @post.user.name %></br>
+		   	     <%= @post.count %>歩</br>
+		       </div>
+		       <div class="pt-3 pl-5">
+		   	      <%= @post.body %>
+		       </div></br>
+		       <div class="text-right pt-4">
+		   	   <div class="text-info">タグ　　　</div>
+		       <% @post.tags.each do |tag| %>
+             <%= tag.name %>
+           <% end %></div>
+		       <div class="text-right">
+		       	<%# if @post.user == current_user %>
+		           <%= link_to "削除する", @post, method: :delete, data: { confirm: '本当にかまいませんか？' }, class: "btn btn-danger ml2" %>
+		   	       <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success ml2" %>
+		      	<%# end %>
+		       </div>
+              <div class=<%= "like-" + @post.id.to_s %> >
+                <%= render "public/likes/btn", post: @post %>
+              </div>
+
+	            <div class="post-comments-counter pt-3">
+                <%= render "public/comments/counter", post: @post %>
+              </div>
+	            <div class="post-comments-index pt-2">
+                <%= render "public/comments/index", post: @post %>
+              </div>
+
+             <%= render "public/comments/form", post: @post, comment: @comment %></div>
+
+	   <% else %>
+	     <% if @post.status == "disclosure" %>
+	       <div class="content col-md-7">
+		     <h2 class="section-ttl"><%= @post.title %></h2>
+		     <div class="flex text-center">
+		     <% if @post.image.attached? %>
+		   	  <%= image_tag @post.image, size: "400x300" %>
+		   	 <% else %>
+		   	  <%= image_tag 'no_image', size: "400x300" %>
+         <% end %>
+		     </div></br>
+		     <div class="post_info text-right">
+		   	  作成者　<%= @post.user.name %></br>
+		   	  <%= @post.count %>歩</br>
+		     </div>
+		     <div class="pt-3 pl-5">
+		   	  <%= @post.body %>
+		     </div></br>
+		     <div class="text-right pt-4">
+		   	 <div class="text-info">タグ　　　</div>
+		     <% @post.tags.each do |tag| %>
+           <%= tag.name %>
+         <% end %></div>
+         <div class=<%= "like-" + @post.id.to_s %> >
+            <%= render "public/likes/btn", post: @post %>
+          </div>
+
+	        <div class="post-comments-counter pt-3">
+             <%= render "public/comments/counter", post: @post %>
+          </div>
+	        <div class="post-comments-index pt-2">
+             <%= render "public/comments/index", post: @post %>
+          </div>
+
+          <%= render "public/comments/form", post: @post, comment: @comment %>
+          </div>
+       <% else %>この投稿は非公開です
+       <% end %>
+    <% end %>
+    <%= render "public/users/side" %>
+   <% else %>
+       <% if @post.status == "disclosure" %>
+	       <div class="content col-md-7">
+		     <h2 class="section-ttl"><%= @post.title %></h2>
+		     <div class="flex text-center">
+		     <% if @post.image.attached? %>
+		   	  <%= image_tag @post.image, size: "400x300" %>
+		   	 <% else %>
+		   	  <%= image_tag 'no_image', size: "400x300" %>
+         <% end %>
+		     </div></br>
+		     <div class="post_info text-right">
+		   	  作成者　<%= @post.user.name %></br>
+		   	  <%= @post.count %>歩</br>
+		     </div>
+		     <div class="pt-3 pl-5">
+		   	  <%= @post.body %>
+		     </div></br>
+		     <div class="text-right pt-4">
+		   	 <div class="text-info">タグ　　　</div>
+		     <% @post.tags.each do |tag| %>
+           <%= tag.name %>
+         <% end %></div>
+       <% else %>この投稿は非公開です
+       <% end %>
+   <% end %>
+</div>
+</div>

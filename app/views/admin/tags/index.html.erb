@@ -1,2 +1,32 @@
-<h1>Admin::Tags#index</h1>
-<p>Find me in app/views/admin/tags/index.html.erb</p>
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-md-5">
+      <h2>タグ一覧</h2>
+
+       <table class='table mt-3'>
+         <thead>
+           <th>タグID</th>
+           <th>タグ名</th>
+           <th></th>
+         </thead>
+         <tbody>
+           <% @tags.each do |tag| %>
+           <tr>
+             <td><%= tag.id %></td>
+             <td><%= tag.name %></td>
+             <td><%#= link_to 'Destroy', tag, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
+           </tr>
+           <% end %>
+         </tbody>
+       </table>
+      </div>
+      <div class="col-md-5">タグを追加
+         <%= form_with model: @tag, url: admin_tags_path, class: "d-flex align-items-center" do |f| %>
+         <%= render 'layouts/errors', model: f.object %></br>
+          <div class="ml-3"><%= f.label :name, "タグ名", class: "small" %></div>
+          <div class="ml-3"><%= f.text_field :name, placeholder: "タグ名" %></div>
+          <div class="ml-2"><%= f.submit "新規登録", class: "form-control btn btn-success ml-5" %></div>
+         <% end %>
+       </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body1 {
+  background-image: image-url("hoge.jpg");
+}
+
+.side_menu{
+  background-color: #e6e6fa;
+}
+.side_tag{
+  background-color: #d2b48c;
+}
+.top-img {
+  background-image: image-url('hoge1.jpg');
+  background-color:rgba(200,200,200,0.35);
+  background-blend-mode:lighten;
+  margin-top: 70px;
+  height: 420px;
+  width: 640px;
+}
+.top-text{
+  padding-top: 90px;
+  padding-left: 120px;
+  color: gray;
+}
+.guest-log-in{
+  margin-top: 40px;
+}
+.about-img1 {
+  background-image: image-url('training1.jpg');
+  background-color:rgba(200,200,200,0.35);
+  background-blend-mode:lighten;
+  margin-top: 70px;
+  height: 420px;
+  width: 640px;
+}
+.about-img2 {
+  background-image: image-url('food1.jpg');
+  background-color:rgba(200,200,200,0.35);
+  background-blend-mode:lighten;
+  margin-top: 70px;
+  height: 420px;
+  width: 640px;
+}
+
+.about-text1{
+  padding-top: 50px;
+  padding-left: 400px;
+  color: #191970;
+}
+
+.about-text2{
+  padding-top: 30px;
+  padding-left: 30px;
+  color: #800000;
+}

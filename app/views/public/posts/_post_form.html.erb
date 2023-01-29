@@ -1,0 +1,49 @@
+
+<%= form_with model:post do |f| %>
+	<%#= render 'layouts/error_messages', model: f.object %>
+	<div class="row ">
+		 <%= render "public/tags/tag_search" %>
+		<div class="col-md-5 ml-5">
+		<div>
+		  <%= f.label "画像" %></br>
+          <%= f.file_field :image, accept: "image/*" %>
+		</div>
+		<table class="post_info post_form">
+			<tbody>
+				<tr>
+					<td><%= f.label :title, "タイトル" %></td>
+					<td><%= f.text_field :title %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :count, "歩数" %></td>
+					<td><%= f.text_field :count %> 歩</td>
+				</tr>
+				<tr>
+					<td><%= f.label :body, "テキスト" %></td>
+					<td><%= f.text_area :body %></td>
+				</tr>
+				<tr><% if current_user.name != "guestuser" %>
+					<td><%= f.label :status, "公開設定", class:"col-md-2" %></td>
+					<td><%= f.select :status, Post.statuses.keys.map {|k| [I18n.t("enums.user.status.#{k}"), k]} %></td>
+				</tr><% end %>
+			</tbody>
+		</table>
+		</div>
+		<div class='form-group col-md-3'>タグ
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+          <div class='form-check'>
+             <%= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box class: 'form-check-input' %>
+                <%= tag.text %>
+             <% end %>
+           </div>
+      <% end %>
+      <div class="flex align-center pl5">
+			<%= f.submit submit, class: "btn btn-primary" %>
+		  </div>
+    </div>
+      
+		
+		  </div>
+	   </div>
+<% end %>

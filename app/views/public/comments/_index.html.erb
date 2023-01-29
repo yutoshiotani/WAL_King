@@ -1,0 +1,19 @@
+<table>
+  <tbody>
+      <% post.comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= link_to user_path(comment.user) do %>
+            <%= comment.user.name %>
+          <% end %>
+        </td>
+        <td><%= comment.content %></td>
+        <td>
+          <% if comment.user == current_user %>
+            <%= link_to "削除する", post_comment_path(post, comment), method: :delete, class: "btn btn-sm btn-outline-danger pull-right", remote: true %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>

@@ -36,5 +36,6 @@ ER図 https://drive.google.com/file/d/1_XWMBTdml0eiOlcxWF3Vx4ue_TpwiNlR/view?usp
 - IDE：Cloud9
 
 ## 使用素材
-Shutterstock
-https://www.shutterstock.com
+シルエットAC  https://www.silhouette-ac.com
+写真AC        https://www.photo-ac.com
+LOGO FACTORY  https://www.logofactoryweb.com

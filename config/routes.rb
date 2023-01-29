@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
    devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -9,28 +13,42 @@ Rails.application.routes.draw do
   }
 
 
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/users/sessions#guest_sign_in'
+  end
+
+
   root 'public/homes#top'
   get 'about' => 'public/homes#about'
 
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
+
   namespace :admin do
    resources :tags
    resources :posts
    resources :jobs
    resources :users
   end
-  namespace :public do
+  scope module: :public do
    resources :tags
-   resources :posts
+
    resources :jobs
-   resources :users
+   resources :users do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+   end
    resources :targets
    resources :steps
-   resources :post_tags
+   resources :posts do
+    resources :post_tags
+    resource :likes, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+   end
+
+
   end
+
+
 
   #devise_for :admins
   #devise_for :users

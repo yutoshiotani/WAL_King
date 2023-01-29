@@ -1,0 +1,88 @@
+
+<%= form_with model:target do |f| %>
+	<%#= render 'layouts/error_messages', model: f.object %>
+	<div class="row">
+		<div class="col-md-4 mt-5 mb-5">
+		<% unless current_user.height.blank? %>
+		身長<%= current_user.height %>cmの標準体重(BMI22)は<%= current_user.fair_weight %>kgです。</br>
+		<% unless current_user.weight.blank? %>
+     現在のBMI<%= current_user.bmi %>(体重<%= current_user.weight %>kg)
+
+   <table class="table mt-3">
+   	<thead>
+   		<th><font size="2">BMI　(体重(kg)/　｛身長(m)×身長(m)}</font></th>
+   		<th>判定　　</th>
+   		<th>身長<%= current_user.height %>cmの場合</th>
+   	</thead>
+   	　<tr>
+   	　	<td>18．5未満</td>
+   	　	<td><font size="2">痩せすぎ</font></td>
+   	　	<td><font size="4"><%= current_user.bmi18 %>kg～</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>18.5～25</td>
+   	　	<td><font size="2">普通体重</td>
+   	　	<td><font size="4"><%= current_user.bmi18 %>～<%= current_user.bmi25 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>25～30</td>
+   	　	<td><font size="2">肥満　　(Ⅰ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi25 %>～<%= current_user.bmi30 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>30～35</td>
+   	　	<td><font size="2">肥満　　(Ⅱ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi30 %>～<%= current_user.bmi35 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>35～40</td>
+   	　	<td><font size="2">肥満　　(Ⅲ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi35 %>～<%= current_user.bmi40 %>kg</font></td>
+   	　</tr>
+   	　<tr>
+   	　	<td>40～</td>
+   	　	<td><font size="2">肥満　　(Ⅳ度)</font></td>
+   	　	<td><font size="4"><%= current_user.bmi40%>kg～</font></td>
+   	　</tr>
+   	<tbody>
+   		<tr></tr>
+   	</tbody>
+   </table>
+   <% end %>
+   <% end %>
+   </div>
+   
+		<div class="col-md-7 ml-5">
+
+		<table class="post_info post_form">
+			<tbody>
+				<tr>
+					<td><%= f.label :limit, "期限" %></td>
+					<td><%= f.date_field :limit %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :body, "内容" %></td>
+					<td><%= f.text_area :body %> </td>
+				</tr>
+				<tr><%= current_user.height %>
+					<td><%= f.label :weight, "目標体重" %></td>
+					<td><%= f.text_field :weight %> kg</td>
+				</tr>
+				<tr>
+					<td><%= f.label :daily_step, "一日の目標歩数" %></td>
+					<td><%= f.text_field :daily_step %> 歩</td>
+				</tr>
+				<tr>
+					<td><%= f.label :status, "達成度" %></td>
+			    <td><%= f.select :status, Target.statuses.keys.map {|k| [I18n.t("enums.target.status.#{k}"), k]} %></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		  <div class="flex align-center pl5">
+			<%= f.submit submit, class: "btn btn-primary" %>
+		  </div>
+		  </div>
+	   </div>
+<% end %>
