@@ -17,7 +17,7 @@
            <tr>
              <td>
                  <%= link_to admin_post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, admin_post_path(post) %></td>
              <td><%#= link_to "削除する", post, url: admin_posts_path, method: :delete, data: { confirm: '本当にかまいませんか？' }, class: "btn btn-danger ml2" %></td>

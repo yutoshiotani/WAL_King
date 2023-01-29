@@ -18,7 +18,7 @@
            <tr>
              <td>
                  <%= link_to post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, post_path(post) %></td>
              <td class=<%= "like-" + post.id.to_s %> >

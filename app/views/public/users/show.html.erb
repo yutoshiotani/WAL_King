@@ -65,7 +65,7 @@
 
 	      <div class="col-lg-3 mt-5">
 	      <%# if @user.profile_image.attached? %>
-	      	<%= image_tag @user.profile_image, size: "300x200" %>
+	      	<%= image_tag @user.get_profile_image, size: "300x200" %>
 	      <%# else %>
 		   	<%#= image_tag 'no_image.jpg', size: "300x200" %>
          <%# end %>
@@ -144,7 +144,7 @@
            <tr>
              <td>
                  <%= link_to post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, post_path(post) %></td>
              <td class=<%= "like-" + post.id.to_s %> >
@@ -157,7 +157,7 @@
            <tr>
              <td>
                  <%= link_to post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, post_path(post) %></td>
              <td class=<%= "like-" + post.id.to_s %> >
@@ -238,11 +238,11 @@
 	    </div>
 
 	      <div class="col-lg-3 mt-5">
-	      <% if @user.profile_image.attached? %>
-	      	<%= image_tag @user.profile_image, size: "300x200" %>
-	      <% else %>
-		   	<%= image_tag 'no_image', size: "300x200" %>
-         <% end %>
+	      <%# if @user.profile_image.attached? %>
+	      	<%= image_tag @user.get_profile_image, size: "300x200" %>
+	      <%# else %>
+		   	<%#= image_tag 'no_image', size: "300x200" %>
+         <%# end %>
 	      </div></br>
 
 
@@ -318,7 +318,7 @@
            <tr>
              <td>
                  <%= link_to post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, post_path(post) %></td>
              <td class=<%= "like-" + post.id.to_s %> >
@@ -331,7 +331,7 @@
            <tr>
              <td>
                  <%= link_to post_path(post) do %>
-                 <%= image_tag post.image, size:'50x50' %><% end %>
+                 <%= image_tag post.get_image, size:'50x50' %><% end %>
              </td>
              <td><%= link_to post.title, post_path(post) %></td>
              <td class=<%= "like-" + post.id.to_s %> >
