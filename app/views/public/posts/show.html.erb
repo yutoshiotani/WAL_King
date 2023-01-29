@@ -48,9 +48,9 @@
 	       <div class="content col-md-7">
 		     <h2 class="section-ttl"><%= @post.title %></h2>
 		     <div class="flex text-center">
-		     
+
 		   	  <%= image_tag @post.get_image, size: "400x300" %>
-		   	 
+
 		     </div></br>
 		     <div class="post_info text-right">
 		   	  作成者　<%= @post.user.name %></br>
@@ -87,7 +87,7 @@
 		     <h2 class="section-ttl"><%= @post.title %></h2>
 		     <div class="flex text-center">
 		     <%# if @post.image.attached? %>
-		   	  <%= image_tag @post.getimage, size: "400x300" %>
+		   	  <%= image_tag @post.get_image, size: "400x300" %>
 		   	 <%# else %>
 		   	  <%#= image_tag 'no_image', size: "400x300" %>
          <%# end %>
