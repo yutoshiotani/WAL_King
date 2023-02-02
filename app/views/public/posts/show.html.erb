@@ -8,6 +8,9 @@
 		       <div class="flex text-center">
 		         <%# if @post.image.attached? %>
 		   	     <%= image_tag @post.get_image, size: "400x300" %>
+		   	     <% @post.image_tags.each do |tag| %>
+            <span class="label"><%= tag.name %></span>
+            <% end %>
 		   	     <%# else %>
 		   	     <%#= image_tag 'no_image', size: "400x300" %>
              <%# end %>
@@ -50,6 +53,9 @@
 		     <div class="flex text-center">
 
 		   	  <%= image_tag @post.get_image, size: "400x300" %>
+		   	  <% @post.image_tags.each do |tag| %>
+            <span class="label"><%= tag.name %></span>
+          <% end %>
 
 		     </div></br>
 		     <div class="post_info text-right">

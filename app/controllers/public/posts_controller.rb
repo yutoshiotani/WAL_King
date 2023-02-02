@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tags = Tag.all
-    
+
   end
 
   def show
@@ -28,11 +28,16 @@ class Public::PostsController < ApplicationController
    @post = Post.new(post_params)
    @post.user_id = current_user.id
    @tags = Tag.all
-    if @post.save!
+   @post.save
+   image_tags = Vision.get_image_data(@post.image)
+   image_tags.each do |image_tag|
+     @post.image_tags.create(name: image_tag)
+   end
+    #if @post.save!
       redirect_to post_path(@post)
-    else
-      render :new
-    end
+    #else
+      #render :new
+    #end
   end
 
   def update
@@ -44,7 +49,7 @@ class Public::PostsController < ApplicationController
     render :edit
    end
   end
-  
+
   def destroy
    post = Post.find(params[:id])
     if
@@ -52,7 +57,7 @@ class Public::PostsController < ApplicationController
        redirect_to posts_path
     end
   end
-  
+
   private
   def post_params
     params.require(:post).permit(:title, :body, :count, :user_id, :image ,:status, tag_ids: [])
